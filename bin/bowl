@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+require 'bowler'
+require 'bowler/cli'
+
+Bowler::CLI.start(ARGV)
