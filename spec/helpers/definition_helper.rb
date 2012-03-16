@@ -5,7 +5,7 @@ module Bowler
 
     def stub_definition
       OpenStruct.new ({
-        :processes => [ :app1, :app2, :app3 ],
+        :processes => [ :app1, :app2, :app3, :other, :a, :b, :c ],
         :tree => {
           :app1 => [ :app2, :app3 ],
           :app2 => [ :app3 ],

@@ -1,5 +1,7 @@
 module Bowler
   class DSL
+    attr_reader :processes, :global_dependencies
+
     def self.evaluate(pinfile)
       dsl = new
       dsl.eval_pinfile(pinfile)
@@ -17,6 +19,7 @@ module Bowler
     def initialize
       @processes = []
       @global_dependencies = []
+      @specified_dependencies = []
     end
 
     def dependency(*dependencies)
@@ -29,6 +32,7 @@ module Bowler
         dependencies = [params.values.first]
 
         @processes << { :process => parent, :dependencies => [dependencies].flatten }
+        @specified_dependencies += dependencies.flatten
       else
         @processes << { :process => params, :dependencies => [ ] }
       end
@@ -39,7 +43,7 @@ module Bowler
         :tree => @processes.each_with_object({}) {|p, hash|
           hash[p[:process]] = (p[:dependencies] + @global_dependencies).uniq
         },
-        :processes => (@processes.map {|x| x[:process]} + @global_dependencies).uniq
+        :processes => (@processes.map {|x| x[:process]} + @global_dependencies + @specified_dependencies).uniq
       }
       OpenStruct.new(definition)
     end

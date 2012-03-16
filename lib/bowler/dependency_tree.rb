@@ -23,7 +23,7 @@ module Bowler
       on = dependencies_for(processes)
       off = @definition.processes.reject {|i| on.include? i }
 
-      [ on.map {|x| "#{x}=1" }.join(','), off.map {|x| "#{x}=0" }.join(',') ].flatten.join(',')
+      [ on.map {|x| "#{x}=1" }, off.map {|x| "#{x}=0" } ].flatten.sort.join(',')
     end
 
   end

@@ -1,0 +1,4 @@
+dependency :templates
+
+process :app => [:database, :tiles]
+process :tiles => :database

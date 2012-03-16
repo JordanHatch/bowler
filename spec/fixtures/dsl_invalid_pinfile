@@ -1,0 +1,3 @@
+dependey :templates
+
+process :app => [:database,,,]
