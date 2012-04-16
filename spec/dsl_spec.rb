@@ -1,4 +1,5 @@
 require 'bowler'
+require_relative 'helpers/definition_helper'
 
 module Bowler
 
