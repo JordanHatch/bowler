@@ -19,7 +19,7 @@ module Bowler
 
     def process_list_for(processes)
       on = dependencies_for(processes)
-      off = @definition.processes.reject {|i| on.include? i }
+      off = @definition.processes - on
 
       [ on.map {|x| "#{x}=1" }, off.map {|x| "#{x}=0" } ].flatten.sort.join(',')
     end
