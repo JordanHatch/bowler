@@ -13,15 +13,16 @@ module Bowler
       @definition = definition
     end
 
-    def dependencies_for(processes)
-      processes.inject([]) do |array, p|
-        array += [ (@definition.tree[p] || []), p ].flatten
-      end.uniq
+    def dependencies_for(processes, visited = [])
+      return [] unless processes
+      (processes - visited).map { |p|
+        [dependencies_for(@definition.tree[p], visited + [p]), p]
+      }.flatten.compact.uniq
     end
 
     def process_list_for(processes)
       on = dependencies_for(processes)
-      off = @definition.processes.reject {|i| on.include? i }
+      off = @definition.processes - on
 
       [ on.map {|x| "#{x}=1" }, off.map {|x| "#{x}=0" } ].flatten.sort.join(',')
     end

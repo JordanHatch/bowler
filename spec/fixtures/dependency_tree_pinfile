@@ -2,4 +2,7 @@ dependency :required
 
 process :foo => :bar
 process :nyan => [:foo, :bar]
+process :cat => :nyan
+process :loop1 => :loop2
+process :loop2 => :loop1
 process :rick
