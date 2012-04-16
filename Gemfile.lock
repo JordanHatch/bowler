@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    bowler (0.0.2)
+    bowler (0.0.3)
       foreman
 
 GEM
