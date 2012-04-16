@@ -15,6 +15,12 @@ module Bowler
         tree.dependencies_for([:foo]).should =~ [:bar, :foo, :required]
         tree.dependencies_for([:nyan]).should =~ [:bar, :foo, :nyan, :required]
       end
+
+      it "should find the dependencies of dependencies" do
+        tree = DependencyTree.load File.join( File.dirname(__FILE__), 'fixtures', 'dependency_tree_pinfile' )
+
+        tree.dependencies_for([:cat]).should =~ [:cat, :nyan, :bar, :foo, :required]
+      end
     end
 
     context "given an array of one process" do
