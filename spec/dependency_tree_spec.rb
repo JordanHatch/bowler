@@ -21,6 +21,12 @@ module Bowler
 
         tree.dependencies_for([:cat]).should =~ [:cat, :nyan, :bar, :foo, :required]
       end
+
+      it "should correctly handle recursive dependencies" do
+        tree = DependencyTree.load File.join( File.dirname(__FILE__), 'fixtures', 'dependency_tree_pinfile' )
+
+        tree.dependencies_for([:loop1]).should =~ [:loop1, :loop2, :required]
+      end
     end
 
     context "given an array of one process" do

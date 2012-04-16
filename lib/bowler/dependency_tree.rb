@@ -13,9 +13,11 @@ module Bowler
       @definition = definition
     end
 
-    def dependencies_for(processes)
+    def dependencies_for(processes, visited = [])
       return [] unless processes
-      processes.map { |p| [dependencies_for(@definition.tree[p]), p] }.flatten.compact.uniq
+      (processes - visited).map { |p|
+        [dependencies_for(@definition.tree[p], visited + [p]), p]
+      }.flatten.compact.uniq
     end
 
     def process_list_for(processes)
