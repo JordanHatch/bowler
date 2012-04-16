@@ -14,9 +14,7 @@ module Bowler
     end
 
     def dependencies_for(processes)
-      processes.inject([]) do |array, p|
-        array += [ (@definition.tree[p] || []), p ].flatten
-      end.uniq
+      processes.map { |p| [@definition.tree[p], p] }.flatten.compact.uniq
     end
 
     def process_list_for(processes)
