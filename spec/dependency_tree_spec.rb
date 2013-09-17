@@ -39,7 +39,7 @@ module Bowler
       end
 
       it "should give a correct process list" do
-        @tree.process_list_for([:app2]).should == "a=0,app1=0,app2=1,app3=1,b=0,c=0,other=0"
+        @tree.process_list_for([:app2]).should == "app2=1,app3=1"
       end
     end
 
@@ -53,7 +53,7 @@ module Bowler
       end
 
       it "should give a correct process list" do
-        @tree.process_list_for([:app2, :other]).should == "a=1,app1=0,app2=1,app3=1,b=1,c=1,other=1"
+        @tree.process_list_for([:app2, :other]).should == "a=1,app2=1,app3=1,b=1,c=1,other=1"
       end
     end
 
