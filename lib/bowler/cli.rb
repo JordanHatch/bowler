@@ -23,12 +23,16 @@ module Bowler
     end
 
     def self.build_command(launch_string)
-      "foreman start -c #{launch_string}"
+      "#{self.foreman_exec} start -c #{launch_string}"
     end
 
     private
     def self.start_foreman_with(launch_string)
       exec ( self.build_command launch_string )
+    end
+
+    def self.foreman_exec
+      ENV["BOWLER_FOREMAN_EXEC"] || "foreman"
     end
 
   end

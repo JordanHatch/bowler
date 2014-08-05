@@ -1,5 +1,5 @@
-require 'bowler'
-require_relative 'helpers/definition_helper'
+require_relative 'spec_helper'
+require 'bowler/dependency_tree'
 
 module Bowler
 
