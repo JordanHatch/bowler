@@ -6,6 +6,8 @@ require 'bowler'
 
 require_relative 'helpers/definition_helper'
 
+Bowler::CLI.logger = Logger.new('/dev/null')
+
 RSpec.configure do |config|
   config.mock_framework = :mocha
 end

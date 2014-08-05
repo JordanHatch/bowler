@@ -2,6 +2,7 @@ require 'ostruct'
 
 module Bowler
 
+  autoload :CLI,                  'bowler/cli'
   autoload :DependencyTree,       'bowler/dependency_tree'
   autoload :DSL,                  'bowler/dsl'
 
