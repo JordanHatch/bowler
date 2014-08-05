@@ -7,11 +7,10 @@ module Bowler
       tree = Bowler::DependencyTree.load
       process_list = processes.map(&:to_sym)
 
-      launch_string = tree.process_list_for(process_list)
 
       logger.info "Starting #{tree.dependencies_for(process_list).join(', ')}.."
 
-      start_foreman_with launch_string
+      start_foreman_with( launch_string(to_launch) )
     rescue PinfileNotFound
       logger.error "Bowler could not find a Pinfile in the current directory."
     rescue PinfileError => e
@@ -30,7 +29,13 @@ module Bowler
       "#{self.foreman_exec} start -c #{launch_string}"
     end
 
-    private
+  private
+    def self.launch_string(processes)
+      processes.map {|process|
+        "#{process}=1"
+      }.sort.join(',')
+    end
+
     def self.start_foreman_with(launch_string)
       exec ( self.build_command launch_string )
     end
