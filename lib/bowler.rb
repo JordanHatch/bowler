@@ -1,4 +1,5 @@
 require 'ostruct'
+require 'bowler/version'
 
 module Bowler
 

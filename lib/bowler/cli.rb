@@ -9,8 +9,20 @@ module Bowler
         without: []
       }
       OptionParser.new {|opts|
-        opts.on('-w', '--without APP', 'Exclude a process from being launched') do |process|
+        opts.banner = "Usage: bowl [options] <process>..."
+
+        opts.on('-w', '--without <process>', 'Exclude a process from being launched') do |process|
           options[:without] << process.to_sym
+        end
+
+        opts.on_tail("-h", "--help", "Show this message") do
+          puts opts
+          exit
+        end
+
+        opts.on_tail('-v', '--version', 'Show the gem version') do
+          puts "Bowler #{Bowler::VERSION}"
+          exit
         end
       }.parse!(args)
 
