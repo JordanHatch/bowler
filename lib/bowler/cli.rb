@@ -5,8 +5,6 @@ module Bowler
   class CLI
 
     def self.start(args)
-      tree = Bowler::DependencyTree.load
-
       options = {
         without: []
       }
@@ -18,6 +16,7 @@ module Bowler
 
       processes = args.map(&:to_sym)
 
+      tree = Bowler::DependencyTree.load
       to_launch = tree.dependencies_for(processes) - options[:without]
       logger.info "Starting #{to_launch.join(', ')}.."
 
