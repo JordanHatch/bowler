@@ -20,9 +20,5 @@ module Bowler
       }.flatten.compact.uniq
     end
 
-    def process_list_for(processes)
-      dependencies_for(processes).map {|x| "#{x}=1" }.sort.join(',')
-    end
-
   end
 end

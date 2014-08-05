@@ -37,10 +37,6 @@ module Bowler
       it "should find the correct dependencies" do
         @tree.dependencies_for([:app1]).should =~ [:app2, :app3, :app1]
       end
-
-      it "should give a correct process list" do
-        @tree.process_list_for([:app2]).should == "app2=1,app3=1"
-      end
     end
 
     context "given an array of multiple processes" do
@@ -50,10 +46,6 @@ module Bowler
 
       it "should find the correct dependencies" do
         @tree.dependencies_for([:app1, :other]).should =~ [:app2, :app3, :app1, :a, :b, :c, :other]
-      end
-
-      it "should give a correct process list" do
-        @tree.process_list_for([:app2, :other]).should == "a=1,app2=1,app3=1,b=1,c=1,other=1"
       end
     end
 
