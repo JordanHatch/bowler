@@ -5,6 +5,7 @@ require 'rspec/core'
 require 'bowler'
 
 require_relative 'helpers/definition_helper'
+require_relative 'helpers/cli_helper'
 
 Bowler::CLI.logger = Logger.new('/dev/null')
 

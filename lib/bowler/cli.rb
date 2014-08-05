@@ -1,14 +1,25 @@
 require 'logger'
+require 'optparse'
 
 module Bowler
   class CLI
 
-    def self.start(processes)
+    def self.start(args)
       tree = Bowler::DependencyTree.load
-      process_list = processes.map(&:to_sym)
 
+      options = {
+        without: []
+      }
+      OptionParser.new {|opts|
+        opts.on('-w', '--without APP', 'Exclude a process from being launched') do |process|
+          options[:without] << process.to_sym
+        end
+      }.parse!(args)
 
-      logger.info "Starting #{tree.dependencies_for(process_list).join(', ')}.."
+      processes = args.map(&:to_sym)
+
+      to_launch = tree.dependencies_for(processes) - options[:without]
+      logger.info "Starting #{to_launch.join(', ')}.."
 
       start_foreman_with( launch_string(to_launch) )
     rescue PinfileNotFound
