@@ -16,6 +16,10 @@ module Bowler
     def dependencies_for(processes, visited = [])
       return [] unless processes
       (processes - visited).map { |p|
+        unless @definition.processes.include?(p)
+          raise PinfileError, "process #{p} not found"
+        end
+
         [dependencies_for(@definition.tree[p], visited + [p]), p]
       }.flatten.compact.uniq
     end

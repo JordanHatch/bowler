@@ -16,6 +16,14 @@ module Bowler
         tree.dependencies_for([:nyan]).should =~ [:bar, :foo, :nyan, :required]
       end
 
+      it "should raise when encountering unknown dependencies" do
+        tree = DependencyTree.load File.join( File.dirname(__FILE__), 'fixtures', 'dependency_tree_pinfile' )
+
+        expect {
+          tree.dependencies_for([:not_a_dependency])
+        }.to raise_error(PinfileError)
+      end
+
       it "should find the dependencies of dependencies" do
         tree = DependencyTree.load File.join( File.dirname(__FILE__), 'fixtures', 'dependency_tree_pinfile' )
 
