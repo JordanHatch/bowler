@@ -42,6 +42,12 @@ You can run multiple processes at once:
 bowl app api
 ```
 
+## Releasing the gem
+
+- Update the version in `lib/bowler/version.rb`
+- `gem build bowler.gemspec`
+- `gem push <artefact>.gem`
+
 ## License
 
 MIT License
