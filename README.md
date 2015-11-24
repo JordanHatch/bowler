@@ -45,6 +45,8 @@ bowl app api
 ## Releasing the gem
 
 - Update the version in `lib/bowler/version.rb`
+- Commit and tag the new release version
+- Update `CHANGELOG.md`
 - `gem build bowler.gemspec`
 - `gem push <artefact>.gem`
 
