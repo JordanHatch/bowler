@@ -30,7 +30,7 @@ module Bowler
 
       tree = Bowler::DependencyTree.load
       to_launch = tree.dependencies_for(processes) - options[:without]
-      logger.info "Starting #{to_launch.join(', ')}.."
+      logger.info "Starting #{to_launch.join(', ')}..."
 
       start_foreman_with( launch_string(to_launch) )
     rescue PinfileNotFound
