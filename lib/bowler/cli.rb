@@ -15,6 +15,10 @@ module Bowler
           options[:without] << process.to_sym
         end
 
+        opts.on_tail('-o', '--output-only', 'Output the apps to be started') do
+          options[:output_only] = true
+        end
+
         opts.on_tail("-h", "--help", "Show this message") do
           puts opts
           exit
@@ -30,9 +34,13 @@ module Bowler
 
       tree = Bowler::DependencyTree.load
       to_launch = tree.dependencies_for(processes) - options[:without]
-      logger.info "Starting #{to_launch.join(', ')}..."
 
-      start_foreman_with( launch_string(to_launch) )
+      if options[:output_only]
+        puts to_launch.join("\n")
+      else
+        logger.info "Starting #{to_launch.join(', ')}..."
+        start_foreman_with( launch_string(to_launch) )
+      end
     rescue PinfileNotFound
       logger.error "Bowler could not find a Pinfile in the current directory."
     rescue PinfileError => e
