@@ -1,3 +1,7 @@
+# 2.1.0
+
+- Adds support for the `--output-only` flag. (#9)
+
 # 2.0.1
 
 - The "starting" message now includes three dots, rather than two. (#8)
