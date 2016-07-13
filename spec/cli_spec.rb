@@ -61,6 +61,16 @@ module Bowler
       end
     end
 
+    context 'with --output-only flag' do
+      it 'outputs the apps to be run' do
+        stub_dependency_tree(:myapp, :myapp2)
+
+        STDOUT.expects(:puts).with("myapp\nmyapp2")
+
+        CLI.start(['myapp', 'myapp2', '--output-only'])
+      end
+    end
+
     it 'starts foreman with the provided processes' do
       stub_dependency_tree(:a, :b)
 
